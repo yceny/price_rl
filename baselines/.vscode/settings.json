@@ -1,0 +1,14 @@
+{
+    "git.ignoreLimitWarning": true,
+    "files.associations": {
+        "typeinfo": "cpp",
+        "algorithm": "cpp",
+        "__string": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "ios": "cpp",
+        "*.tcc": "cpp"
+    }
+}
