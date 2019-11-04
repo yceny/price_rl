@@ -35,7 +35,7 @@ class PricingSimpleEnv(gym.Env):
     #     - By the end of time T + shift window.
     # 
     #
-    # States: 
+    # States:
     # (1) inventory at hand n: 2 states here, one for each batch of products
     # (2) quality of product: 2 states here, one for each batch of products
     #
