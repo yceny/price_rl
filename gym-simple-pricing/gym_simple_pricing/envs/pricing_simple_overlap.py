@@ -82,7 +82,7 @@ class PricingSimpleEnv(gym.Env):
         self.done1 = False
         self.done2 = True
         
-        self.action_space = spaces.Box(low = self.priceLow, high = self.priceHigh, shape=(1,), dtype=np.float32)
+        self.action_space = spaces.Box(low = self.priceLow, high = self.priceHigh, shape=(2,), dtype=np.float32)
         #TODO: FIXME: not sure if it is better to use a normlized version of numberOrder
         ### quality need to start at high, inventory level need to start at numberOrder
         # self.observation_space = spaces.Tuple([spaces.Discrete(self.numberOrder + 1), 
