@@ -230,7 +230,7 @@ class PricingExtOnlineEnv(gym.Env):
                 if QSnumberBuySP < inventoryLevel:
                     reward = (price1 - self.unitOrderingCost)* (inventoryLevel - QSnumberBuySP) + (price2 - self.unitOrderingCost)* QSnumberBuySP
                 else:
-                    (price2 - self.unitOrderingCost)* inventoryLevel
+                    reward = (price2 - self.unitOrderingCost)* inventoryLevel
             # reward = (price - self.unitOrderingCost) * inventoryLevel 
             inventoryLevel = 0
             self.state[0] = inventoryLevel
