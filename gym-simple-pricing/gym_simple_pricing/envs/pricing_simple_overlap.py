@@ -10,7 +10,7 @@ from scipy.stats import truncnorm
 import math
 import pdb 
 
-class PricingSimpleEnv(gym.Env):
+class PricingSimpleOverlapEnv(gym.Env):
 
     ## NOTE: please read this carefully
     #####################################################################################################
