@@ -73,11 +73,11 @@ class PricingEx2OverlapEnv(gym.Env):
         self.qualityScale = 4 # k in Weibull distribution
 
         self.numberOrder = 500 # assume we order the same quantity of products each time
-        self.orderingCost = 50
         self.priceLow = -1.
         self.priceHigh = 1.
         self.qualityLow = 0.
         self.qualityHigh = 1.
+        self.messageCost = 500
         # self.taxRate = 0.3 # tax benefit from donating
         
         self._max_episode_steps = 15
@@ -127,11 +127,10 @@ class PricingEx2OverlapEnv(gym.Env):
 
     def step(self, action):
         # shift to range [0, 300]
-        action1 = np.clip(action[0], self.action_space.low, self.action_space.high)
-        action1 = 150.0 * (np.array(action1)+ 1.)
-
-        action2 = np.clip(action[1], self.action_space.low, self.action_space.high)
-        action2 = 150.0 * (np.array(action2)+ 1.)
+        action = np.clip(action, self.action_space.low, self.action_space.high)
+        
+        action1 = 150.0 * (np.array(action[0])+ 1.)
+        action2 = 150.0 * (np.array(action[1])+ 1.)
 
         msg1 = (action[2] + 1.) / 2.
         msg2 = (action[3] + 1.) / 2.
