@@ -29,7 +29,7 @@ def perform_SGD(data_x, data_y, init_alpha, ratio_sigma2, mu_0, lr=1e-3):
         loss = nlogp_loss(data_x, data_y, c_alpha, ratio_sigma2, mu_0)
     return c_alpha
 
-class PricingSimpleEnv(gym.Env):
+class PricingEx2OverlapEnv(gym.Env):
 
     ## NOTE: please read this carefully
     #####################################################################################################
