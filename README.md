@@ -1,4 +1,4 @@
-# price_rl
+# dynamic pricing and information disclosure
 
 ### Installation
 
