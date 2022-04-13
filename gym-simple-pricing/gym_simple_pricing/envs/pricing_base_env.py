@@ -12,71 +12,26 @@ import pdb
 
 class PricingBaseEnv(gym.Env):
 
-    #####################################################################################################
-    # A monopoly retailer sells fresh produce to customers who come to retail stores, see the posted price, 
-    # examine the quality of products and decide whether to purchase the product
-    #
-    # The goal of the retailer is to maximize revenue by setting optimal price over time and decide when
-    # to donate the remaining product. 
-    # 
-    # Assumptions: 
-    # (1) The retailer starts with N unit of products for each episode
-    # (2) Customers arrive with Poisson distribution at a rate of arrival_rate, which is constant over time.
-    # (3) Customers decision making depends on price sensitivity and quality sensitivity, which are 
-    # heterogeneous among customers. We assume
-    # Weibull distribution for both reservation price and reservation quality. 
-    # (4) The quality of products deteriorate over time according to q = Qexp(-alpha * t).
-    # (5) Products have a life span of time T steps. At the end of T, whatever left is donated to charity 
-    # organization, and the monopoly receives tax benefits. 
-    # (6) In each time step, a customer buys at most one unit of product. 
-    # (7) Terminal state if either of the following occurs
-    #     - N units of products have been sold out 
-    #     - By the end of time T
-    #     - the reatiler decides to donate the remaining products
-    # 
-    #
-    # States: 
-    # (1) inventory at hand n
-    # (2) quality of product
-    #
-    # Actions: 
-    # (1) price, continuous from 0 to 3
-    # 
-    #     
-    #
-    #####################################################################################################
-
     def __init__(self):
-        self.arrivalRate = 60 # arrival rate of shoppers per day, estimated visits to Walmart per day
-        # self.priceSensitivity = 0.0045 # 1/lambda in Weibull distribution
+        self.arrivalRate = 70 # arrival rate of shoppers per day, estimated visits to Walmart per day
         self.priceSensitivity = 0.004
         self.priceScale = 4 # k in Weibull distribution
         self.qualitySensitivity = 4 # 1/lambda in Weibull distribution
-        # self.qualityScale = 4 # k in Weibull distribution
         self.qualityScale = 1
 
         self.numberOrder = 500 # assume we order the same quantity of products each time
-        self.orderingCost = 500 * 150.
+        self.orderingCost = 500 * 3.
         self.priceLow = -1.
         self.priceHigh = 1.
 
-        # self.taxRate = 0.3 # tax benefit from donating
         self._max_episode_steps = 12 # time before which products have to be sold
         self._cur_episode_step = 0
-        self.unitOrderingCost = 150.
+        self.unitOrderingCost = 3.
 
-        # self.qualityDeteriorateRate = 0.1
-        # self.priorQualityRate = 0.15
-        # self.priorQualitySigma0 = 0.001
-        # self.qualitySigma = 0.004
         self.qualityDeteriorateRate = 0.1
         self.priorQualityRate1 = 0.05
         self.priorQualityRate2 = 0.1
         self.priorQualityRate3 = 0.15
-        #self.qualityDeteriorateRate = 0.06
-        #self.priorQualityRate1 = 0.04
-        #self.priorQualityRate2 = 0.06
-        #self.priorQualityRate3 = 0.08
         self.priorQualitySigma0 = 0.001
         self.qualitySigma = 0.004
 
@@ -92,10 +47,8 @@ class PricingBaseEnv(gym.Env):
         return [seed]
 
     def step(self, action):
-        # shift to range [1, 3]
         action = np.clip(action, self.action_space.low, self.action_space.high)
-        # action = 75 * (np.array(action)+ 3.)
-        action = 150. * (np.array(action)+ 1.)
+        action = 3. * (np.array(action)+ 1.)
         
         self._cur_episode_step += 1
         
@@ -103,11 +56,6 @@ class PricingBaseEnv(gym.Env):
 
         # sample number of shoppers from Poisson process, among those shoppers, some buy apples, others not
         numberSP = np.random.poisson(self.arrivalRate)
-
-        # bayesian_quality = math.exp(-self.priorQualityRate * self._cur_episode_step) + np.random.normal(0, self.qualitySigma)
-        # bayesian_quality = np.clip(bayesian_quality, 0., 1.0)
-        # probability of buying product for each individual customer
-        # probBuySP = math.exp(-(self.priceSensitivity*action[0])**self.priceScale)*(1-math.exp(-(self.qualitySensitivity*bayesian_quality)**self.qualityScale))
         
         # calculate number of buyers, among the shoppers
         numberBuySP = 0
