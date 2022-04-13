@@ -15,5 +15,5 @@ pip install -e .
 cd baselines/baselines/ppo1/
 
 # Running example
-python run_price.py -env pricing-simple-v1 --num-timesteps 250000
+python run_price.py -env pricing-base-v0 --num-timesteps 250000
 ```
