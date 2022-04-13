@@ -1,6 +1,5 @@
-from gym_simple_pricing.envs.pricing_simple_env import PricingSimpleEnv
-from gym_simple_pricing.envs.pricing_ext1_env import PricingExt1Env
-from gym_simple_pricing.envs.pricing_ext2_env import PricingExt2Env
-from gym_simple_pricing.envs.pricing_ext3_env import PricingExt3Env
-from gym_simple_pricing.envs.pricing_simple_env_no_quality import PricingBaseEnv
+from gym_simple_pricing.envs.pricing_base_env import PricingBaseEnv
+from gym_simple_pricing.envs.pricing_model1_env import PricingModel1Env
+from gym_simple_pricing.envs.pricing_model2_env import PricingModel2Env
+
 
