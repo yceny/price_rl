@@ -20,5 +20,6 @@ python run_price.py -env pricing-simple-v1 --num-timesteps 250000
 
 ### Play with learned model
 ```
-python play.py
+python play_avg.py
 ```
+Note that this file need to be modified to be consistent with the learned model
