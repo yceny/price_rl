@@ -64,13 +64,10 @@ class PricingBaseEnv(gym.Env):
             rn = random.choice([1,2,3,4,5,6,7,8])
             if rn == 1:
                 bayesian_quality = math.exp(-self.priorQualityRate1 * self._cur_episode_step) + np.random.normal(0, self.qualitySigma)
-                # bayesian_quality = 1.0 - self.priorQualityRate3 * self._cur_episode_step + np.random.normal(0, self.qualitySigma)
             elif rn == 2:
                 bayesian_quality = math.exp(-self.priorQualityRate2 * self._cur_episode_step) + np.random.normal(0, self.qualitySigma)
-                # bayesian_quality = 1.0 - self.priorQualityRate2 * self._cur_episode_step + np.random.normal(0, self.qualitySigma)
             else:
                 bayesian_quality = math.exp(-self.priorQualityRate3 * self._cur_episode_step) + np.random.normal(0, self.qualitySigma)
-                # bayesian_quality = 1.0 - self.priorQualityRate1 * self._cur_episode_step + np.random.normal(0, self.qualitySigma)
 
             bayesian_quality = np.clip(bayesian_quality, 0., 1.0)
             probBuySP = math.exp(-(self.priceSensitivity*action)**self.priceScale)*(1-math.exp(-(self.qualitySensitivity*bayesian_quality)**self.qualityScale))
